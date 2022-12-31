@@ -1,13 +1,17 @@
-version: '3'
+---
+version: "2.1"
 services:
-    jellyseerr:
-       image: fallenbagel/jellyseerr:latest
-       container_name: jellyseerr
-       environment:
-            - LOG_LEVEL=debug
-            - TZ=Asia/Tashkent
-       ports:
-            - 5055:5055
-       volumes:
-            - /path/to/appdata/config:/app/config
-       restart: unless-stopped
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/bazarr/config:/config
+      - /path/to/movies:/movies #optional
+      - /path/to/tv:/tv #optional
+    ports:
+      - 6767:6767
+    restart: unless-stopped
